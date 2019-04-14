@@ -417,6 +417,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\Profile\" />
     <Folder Include="Content\Uploads\Properties\" />
+    <Folder Include="DB\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

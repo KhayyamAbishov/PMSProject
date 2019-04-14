@@ -1,2 +1,2 @@
-1.Run Create  and Insert scripts in PMSSQL folder
+1.Run Create  and Insert scripts in PMSWeb/DB folder
 2.Correct connetion string
