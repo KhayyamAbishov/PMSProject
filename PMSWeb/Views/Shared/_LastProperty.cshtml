@@ -1,0 +1,25 @@
+﻿@model List<PMSOperation.Models.PropertyViewModel>
+
+<div class="col-md-3 col-sm-6 wow fadeInRight animated">
+    <div class="single-footer">
+        <h4>Last Submitted</h4>
+        <div class="footer-title-line"></div>
+        <ul class="footer-blog">
+            @foreach (var item in Model)
+            {
+            <li>
+                <div class="col-md-3 col-sm-4 col-xs-4 blg-thumb p0">
+                    <a href="@Url.Action("Detail", "Property", new { id = item.PropertyId })">
+                        <img src="@Url.Content(item.Photo.Split(',')[0])">
+                    </a>
+                    <span class="blg-date">@item.AddDate.ToString("dd-MM-yyyy")</span>
+                </div>
+                <div class="col-md-8  col-sm-8 col-xs-8  blg-entry">
+                    <h6> <a href="single.html">@item.PropertyType</a></h6>
+                    <p style="line-height: 17px; padding: 8px 2px;">@item.Price</p>
+                </div>
+            </li>
+            }
+        </ul>
+    </div>
+</div>

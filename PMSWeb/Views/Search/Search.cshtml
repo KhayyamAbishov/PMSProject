@@ -1,0 +1,292 @@
+﻿@using PMSOperation.Models
+@using PMSOperation
+
+@model PMSOperation.Models.SearchModel
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("EndHeadPage")
+
+    <div class="panel panel-default sidebar-menu wow fadeInRight animated  ">
+      
+            <div class="panel-heading col-sm-offset-5 ">
+                <h3 class="panel-title ">Smart searches</h3>
+            </div>
+            <div class="panel-body ">
+                @using (Html.BeginForm("SearchProperty", "Search"))
+                {
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="form-group">
+                                    @*https://stackoverflow.com/questions/10728206/cascading-dropdown-loses-select-items-after-post*@
+                                    @Html.LabelFor(m => m.CityId)
+                                    @Html.AutoDropDownListFor(m => m.CityId, m => m.CityList, m => m.Id, m => m.Name, "- City -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins" })
+                                    @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DistrictId)
+                                    @*@Html.AutoDropDownListFor(m => m.District, null, m => m.Id, m => m.Name, "- District -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins" })*@
+                                    <select id="DistrictId" name="DistrictId" class="form-control">
+                                        <option value="">-District-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div id="metroSec" style="display:none" class="form-group">
+                                    @Html.LabelFor(m => m.MetroId)
+                                    @*@Html.AutoDropDownListFor(m => m.Metro, m => m.MetroList, m => m.Id, m => m.Name, "- Metro -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins" })*@
+                                    <select id="MetroId" name="MetroId" class="form-control">
+                                        <option value="">-Metro-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PropertyStatus)
+                                    @Html.DropDownListFor(m => m.PropertyStatus, EnumHelper.GetSelectList(typeof(PropertyStatusClassifier)), "-Status-", new { @class = "selectpicker show-tick form-control" })
+                                    @Html.ValidationMessageFor(m => m.PropertyStatus, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.PropertyType)
+                                    @Html.DropDownListFor(m => m.PropertyType, EnumHelper.GetSelectList(typeof(PropertyTypeClassifier)), "-Type-", new { @class = "selectpicker show-tick form-control", required = "required" })
+                                    @Html.ValidationMessageFor(m => m.PropertyType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="padding-5">
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.PriceMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.PriceMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.PriceMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @* If House and apartamet and Commercial *@
+
+                    <fieldset class="padding-5" id="houseapartcommarea" style="display:none;">
+                        <div class="row" id="totalarea">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.TotalAreaMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.TotalAreaMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.TotalAreaMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @* If House and Land *@
+                    <fieldset class="padding-5" id="houselandarea" style="display:none;">
+                        <div class="row" id="landarea">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.LandAreaMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.LandAreaMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.LandAreaMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    @* If apartament  *@
+                    <fieldset class="padding-5" id="apartment" style="display:none;">
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.FloorNumberMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.FloorNumberMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.FloorNumberMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.FlatFloorMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.FloorNumberMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.FloorNumberMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.RoomNumberMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.RoomNumberMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.RoomNumberMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    @* If House *@
+                    <fieldset class="padding-5" id="house" style="display:none;">
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.FloorNumberMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.FloorNumberMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.FloorNumberMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                @Html.LabelFor(m => m.RoomNumberMax)
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.RoomNumberMin, new { @class = "form-control", @placeholder = "min" })
+                                    <span class="input-group-addon">-</span>
+                                    @Html.TextBoxFor(m => m.RoomNumberMax, new { @class = "form-control", @placeholder = "max" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <div class="col-sm-2 col-sm-offset-5">
+                        <input type='submit' class='btn btn-finish btn-primary ' id="finish" name='search' value='Search' />
+
+                    </div>
+                }
+            </div>
+     
+       
+    </div>
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+         var model = @Html.Raw(Json.Encode(Model));
+        //city dropdown select
+        $('#CityId').change(function () {
+           
+
+                var selectedCity = $("#CityId").val();
+                var districtSelect = $('#DistrictId');
+                var metrosSelect = $('#MetroId');
+                districtSelect.empty();
+                metrosSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetDistrict", "Property")', { city: selectedCity }, function (districts) {
+                        if (districts != null && !jQuery.isEmptyObject(districts))
+                        {
+                            districtSelect.append($('<option>', {
+                                value: "",
+                                text: "-District-"
+                            }));
+                            $.each(districts, function (index, district) {
+                                districtSelect.append('<option value=' + district.Id + '>' + district.Name + '</option>');
+
+                            });
+
+
+                        };
+                    });
+                }
+
+                if (selectedCity == 1) {
+                    $('#metroSec').show();
+
+                     $.getJSON('@Url.Action("GetMetro", "Property")', { city: selectedCity }, function (metroes) {
+                         if (metroes != null && !jQuery.isEmptyObject(metroes))
+                        {
+                             metrosSelect.append($('<option>', {
+                                value: "",
+                                text: "-Metro-"
+                            }));
+                             $.each(metroes, function (index, metro) {
+                                 metrosSelect.append('<option value=' + metro.Id + '>' + metro.Name + '</option>');
+                             });
+
+                             if (model.Metro != null)
+                                 $("#MetroId").val(model.Metro);
+                        };
+                    });
+                }
+                else {
+                    $('#metroSec').hide();
+                }
+        });
+
+
+
+
+        $('#PropertyType').change(function () {
+
+            var type = $('#PropertyType').val();
+
+            if (type == "1") {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').hide();
+            }
+            else if (type == "2")
+            {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').show();
+            }
+            else if (type == "3") {
+                $('#houseapartcommarea').hide();
+                $('#houselandarea').show();
+            }
+            else if (type == "4")
+            {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').show();
+            }
+            else {
+                $('#houseapartcommarea').hide();
+                $('#houselandarea').hide();
+            }
+
+
+            if (type == "1") {
+                $('#apartment').show();
+                $('#house').hide();
+            }
+            else if (type == "2") {
+                $('#apartment').hide();
+                $('#house').show();
+            }
+            else {
+                $('#apartment').hide();
+                $('#house').hide();
+            }
+        });
+
+    </script>
+}

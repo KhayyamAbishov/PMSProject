@@ -1,0 +1,77 @@
+﻿@using PMSOperation.Models
+@model LandModel
+<!--  End step 1 -->
+<h4 class="info-text"> How much LAND your Property is Beautiful ? </h4>
+<div class="row">
+    <div class="col-sm-offset-4 col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(m => m.LandAreaLand)
+            @Html.TextBoxFor(m => m.LandAreaLand, new { @class = "form-control", required = "required", placeholder = "0", id = "LandArea", name = "LandArea", type = "number" })
+            @Html.ValidationMessageFor(m => m.LandAreaLand, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CreditLand)
+                    @Html.LabelFor(m => m.CreditLand)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.HasDocumentLand)
+                    @Html.LabelFor(m => m.HasDocumentLand)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.FenceLand)
+                    @Html.LabelFor(m => m.FenceLand)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.GasLand)
+                    @Html.LabelFor(m => m.GasLand)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.WaterLand)
+                    @Html.LabelFor(m => m.WaterLand)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ElectricLand)
+                    @Html.LabelFor(m => m.ElectricLand)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.GateLand)
+                    @Html.LabelFor(m => m.GateLand)
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+<!-- End step 2 -->

@@ -1,0 +1,142 @@
+﻿@using PMSOperation.Models
+@model  List<PropertyViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.Partial("EndHeadPage")
+<div class="content-area recent-property" style="background-color: #FFF;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 pr-30 padding-top-40 properties-page user-properties ">
+                <div class="section">
+                    <div class="page-subheader sorting pl0 pr-10">
+
+                        <ul class="sort-by-list pull-left">
+                            <li class="active">
+                                @*<a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
+                                        Property Date <i class="fa fa-sort-amount-asc"></i>
+                                    </a>*@
+                            </li>
+                            <li class="">
+                                @*<a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
+                                        Property Price <i class="fa fa-sort-numeric-desc"></i>
+                                    </a>*@
+                            </li>
+                        </ul><!--/ .sort-by-list-->
+                        <div class="items-per-page pull-right">
+                            <label for="items_per_page"><b>Property per page :</b></label>
+                            <div class="sel">
+                                <select id="items_per_page" name="per_page">
+                                    <option value="3">3</option>
+                                    <option value="6">6</option>
+                                    <option value="9">9</option>
+                                    <option selected="selected" value="12">12</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                    <option value="45">45</option>
+                                    <option value="60">60</option>
+                                </select>
+                            </div><!--/ .sel-->
+                        </div><!--/ .items-per-page-->
+                    </div>
+                </div>
+                <div class="section">
+                    <div id="list-type" class="proerty-th-list">
+                        @foreach (var m in Model)
+                        {
+                        <div class="col-md-4 p0">
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a href="@Url.Action("Detail", "Property", new { id = m.PropertyId})"><img src="@Url.Content(m.Photo?.Split(',')[0])"></a>
+                                </div>
+                                <div class="item-entry overflow">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h5>
+                                                    @if (m.PropertyStatus == PMSOperation.PropertyStatusClassifier.Rent)
+                                                    {
+                                                        <img src="~/Content/assets/img/icon/rent-orange.png">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/assets/img/icon/sale-orange.png">
+                                                    }
+
+                                            </h5>
+                                        </div>
+                                        <div class="col-sm-6 ">
+                                            <h6>
+                                                <i class="fa fa-calendar-o  pull-right">  @m.AddDate.ToString("dd.MM.yyyy")</i>
+                                            </h6>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="dot-hr"></div>
+                                    @if (m.PropertyType == PMSOperation.PropertyTypeClassifier.Land)
+                                    {
+                                        <span class="pull-left"><b>Area : </b>@m.LandArea sot</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="pull-left"><b>Area : </b>@m.TotalArea m<sup>2</sup></span>
+                                    }
+                                    <span class="proerty-price pull-right"> @m.Price <span>&#8380;</span></span>
+                                    <p style="display: none;">@m.PropertyDescription</p>
+
+                                    <div class="property-icon">
+
+
+                                        @if (m.PropertyType == PMSOperation.PropertyTypeClassifier.House)
+                                        {
+                                            <img src="~/Content/assets/img/icon/bed.png"> @(m.RoomNumber) <span>|</span>;
+                                            <img src="~/Content/assets/img/icon/shawer.png"> @(m.Bathroom) <span>|</span>;
+                                            <img src="~/Content/assets/img/icon/cars.png"> @(m.Garage) <span>|</span>;
+                                        }
+                                        @if (m.PropertyType == PMSOperation.PropertyTypeClassifier.Apartament)
+                                        {
+                                            <img src="~/Content/assets/img/icon/bed.png"> @(m.RoomNumber) <span>|</span>;
+                                            <img src="~/Content/assets/img/icon/shawer.png"> @(m.Bathroom) <span>|</span>;
+
+                                        }
+
+                                        <div class="dealer-action pull-right">
+                                            <a class="button" href='@Url.Action("EditProperty", "Property", new {@id = m.PropertyId, @type = m.PropertyType })'>Edit</a>
+                                            @*<a href="submit-property.html" class="button">Edit </a>*@
+                                            <a  class="button delete_user_car" href='@Url.Action("Delete","Property",new {@id= m.PropertyId })'>Delete</a>
+                                            <a class="button" href='@Url.Action("Detail", "Property", new {@id = m.PropertyId })'>View</a>
+
+                                            @*<a href="property-1.html" class="button">View</a>*@
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="pull-right">
+                        <div class="pagination">
+                            <ul>
+                                <li><a href="#">Prev</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

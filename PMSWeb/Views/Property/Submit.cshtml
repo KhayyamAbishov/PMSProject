@@ -1,0 +1,328 @@
+﻿@using PMSOperation.Models
+@using PMSOperation
+
+@model PropertyModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("EndHeadPage")
+
+<div class="content-area submit-property" style="background-color: #FCFCFC;">
+
+    <div class="container">
+        <div class="clearfix">
+            <div class="wizard-container">
+                <div class="wizard-card ct-wizard-orange" id="wizardProperty">
+                    @using (Html.BeginForm("Submit", "Property", FormMethod.Post, new { @id = "propertyform", enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(m=>m.PropertyId)
+                        @Html.Partial("_CustomValidationSummary", ViewData.ModelState);
+                        <div class="wizard-header">
+                            <h3>
+                                <b>Submit</b> YOUR PROPERTY <br>
+                                <small>Lorem ipsum dolor sit amet, consectetur adipisicing.</small>
+                            </h3>
+                        </div>
+                        <ul>
+                            <li><a href="#step1" data-toggle="tab">Step 1 </a></li>
+                            <li><a href="#step2" data-toggle="tab">Step 2 </a></li>
+                            <li><a href="#step3" data-toggle="tab">Step 3 </a></li>
+                            <li><a href="#step4" data-toggle="tab">Finished </a></li>
+                        </ul>
+                        <div class="tab-content ">
+                            <div class="tab-pane" id="step1">
+                                <div class="row p-b-15  ">
+                                    <h4 class="info-text"> Let's start with the basic information (with validation)</h4>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PropertyType)
+                                            @Html.DropDownListFor(m => m.PropertyType, EnumHelper.GetSelectList(typeof(PropertyTypeClassifier)), "-Type-", new { @class = "selectpicker show-tick form-control", required = "required" })
+                                            @Html.ValidationMessageFor(m => m.PropertyType, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.PropertyStatus)
+                                            @Html.DropDownListFor(m => m.PropertyStatus, EnumHelper.GetSelectList(typeof(PropertyStatusClassifier)), "-Status-", new { @class = "selectpicker show-tick form-control", required = "required" })
+                                            @Html.ValidationMessageFor(m => m.PropertyStatus, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.Price)
+                                            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", required = "required", placeholder = "999,999.999", type = "number" })
+                                            @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            @*https://stackoverflow.com/questions/10728206/cascading-dropdown-loses-select-items-after-post*@
+                                            @Html.LabelFor(m => m.City)
+                                            @Html.AutoDropDownListFor(m => m.City, m => m.CityList, m => m.Id, m => m.Name, "- City -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins", required = "required" })
+                                            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.District)
+                                            @*@Html.AutoDropDownListFor(m => m.District, null, m => m.Id, m => m.Name, "- District -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins" })*@
+                                            <select id="District" name="District" class="form-control">
+                                                <option value="">-District-</option>
+                                            </select>
+                                        </div>
+                                        <div id="metroSec" style="display:none" class="form-group">
+                                            @Html.LabelFor(m => m.Metro)
+                                            @*@Html.AutoDropDownListFor(m => m.Metro, m => m.MetroList, m => m.Id, m => m.Name, "- Metro -", new { @class = "selectpicker show-tick form-control", @data_live_search = "true", @data_live_search_style = "begins" })*@
+                                            <select id="Metro" name="Metro" class="form-control">
+                                                <option value="">-Metro-</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.LabelFor(m => m.AddressDescription)
+                                            @Html.TextBoxFor(m => m.AddressDescription, new { @class = "form-control", @placeholder = "Street" })
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="step2">
+                                <div id="apartmenttab" style="display:none;">
+                                    @{ Html.RenderAction("PropertyView", "Property", new { propertyType = 1, model = Model }); }
+                                </div>
+                                <div id="commercialtab" style="display:none;">
+                                    @{ Html.RenderAction("PropertyView", "Property", new { propertyType = 2, model = Model }); }
+                                </div>
+                                <div id="housetab" style="display:none;">
+                                    @{ Html.RenderAction("PropertyView", "Property", new { propertyType = 3, model = Model }); }
+                                </div>
+                                <div id="landtab" style="display:none;">
+                                    @{ Html.RenderAction("PropertyView", "Property", new { propertyType = 4, model = Model }); }
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="step3">
+                                <h4 class="info-text">Give us somme images and videos ? </h4>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="file">Chose Images :</label>
+                                            <input type="file" accept="image/*" name="files" id="files" value="Choose File" class="form-control" multiple="multiple" required />
+
+                                            <p class="help-block">Select multipel images for your property .</p>
+
+                                            @if (Model.Photos.Count > 0)
+                                            {
+                                                @Html.HiddenFor(m=>m.HasImage)
+                                                <div style="display:flex">
+
+                                                    @foreach (var d in Model.Photos)
+                                                    {
+                                                        <div style="flex:30%; padding:5px;">
+                                                            <img src="@Url.Content(d.PhotoPath)" />
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="property-video">Property video :</label>
+                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" value="" placeholder="http://www.youtube.com, http://vimeo.com" name="property_video" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="step4">
+                                <h4 class="info-text"> Finished and submit </h4>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                @Html.LabelFor(m => m.PropertyDescription)
+                                                @Html.TextAreaFor(m => m.PropertyDescription, new { @class = "form-control", @rows = 5 })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  End step 4 -->
+                        </div>
+                        <div class="wizard-footer">
+                            <div class="pull-right">
+                                <input type='button' class='btn btn-next btn-primary' id="name" name='next' value='Next' />
+                                <input type='submit' class='btn btn-finish btn-primary ' id="finish" name='finish' value='Finish' />
+                            </div>
+                            <div class="pull-left">
+                                <input type='button' class='btn btn-previous btn-default' name='previous' value='Previous' />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    }
+                </div>
+                <!-- End submit form -->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+        //city dropdown select
+        $('#City').change(function () {
+            var model = @Html.Raw(Json.Encode(Model));
+
+                var selectedCity = $("#City").val();
+                var districtSelect = $('#District');
+                var metrosSelect = $('#Metro');
+                districtSelect.empty();
+                metrosSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetDistrict", "Property")', { city: selectedCity }, function (districts) {
+                        if (districts != null && !jQuery.isEmptyObject(districts))
+                        {
+                            districtSelect.append($('<option>', {
+                                value: "",
+                                text: "-District-"
+                            }));
+                            $.each(districts, function (index, district) {
+                                districtSelect.append('<option value=' + district.Id + '>' + district.Name + '</option>');
+                                
+                            });
+
+                            if (model.District != null)
+                                $("#District").val(model.District);
+                        };
+                    });
+                }
+
+                if (selectedCity == 1) {
+                    $('#metroSec').show();
+
+                     $.getJSON('@Url.Action("GetMetro", "Property")', { city: selectedCity }, function (metroes) {
+                         if (metroes != null && !jQuery.isEmptyObject(metroes))
+                        {
+                             metrosSelect.append($('<option>', {
+                                value: "",
+                                text: "-Metro-"
+                            }));
+                             $.each(metroes, function (index, metro) {
+                                 metrosSelect.append('<option value=' + metro.Id + '>' + metro.Name + '</option>');
+                             });
+
+                             if (model.Metro != null)
+                                 $("#Metro").val(model.Metro);
+                        };
+                    });
+                }
+                else {
+                    $('#metroSec').hide();
+                }
+        });
+
+        //Next button click
+        $(function () {
+
+            ////
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                console.log(e.target);
+                var target = $(e.target).attr("href");
+
+                if (target == "#step2") {
+                    var propertyType = $('#PropertyType').val();
+
+                    if (propertyType == 1) //apartment
+                    {
+                        $('#apartmenttab').css('display', 'block');
+                        $('#commercialtab').css('display', 'none');
+                        $('#housetab').css('display', 'none');
+                        $('#landtab').css('display', 'none');
+                    }
+                    else if (propertyType == 2) //Commercial
+                    {
+                        $('#apartmenttab').css('display', 'none');
+                        $('#commercialtab').css('display', 'block');
+                        $('#housetab').css('display', 'none');
+                        $('#landtab').css('display', 'none');
+                    }
+                    else if (propertyType == 3) //house
+                    {
+                        $('#apartmenttab').css('display', 'none');
+                        $('#commercialtab').css('display', 'none');
+                        $('#housetab').css('display', 'block');
+                        $('#landtab').css('display', 'none');
+                    }
+                    else // land
+                    {
+                        $('#apartmenttab').css('display', 'none');
+                        $('#commercialtab').css('display', 'none');
+                        $('#housetab').css('display', 'none');
+                        $('#landtab').css('display', 'block');
+                    }
+
+                    //$('#servertab').load('@Url.Action("PropertyView", "Property")', { propertyType: propertyType });
+                }
+            });
+            /////
+
+
+        })
+
+
+    function updateActionUrl() {
+
+    var propertyType = $('#PropertyType').val();
+    var propertyName = null;
+
+    switch (propertyType) {
+    case "1":
+    propertyName = 'Apartment';
+    break;
+    case "2":
+    propertyName = 'House';
+    break;
+    case "3":
+    propertyName = 'Land';
+    break;
+    case "4":
+    propertyName = 'Commercial';
+    break;
+    }
+
+    var url = "/Property/Submit" + propertyName;
+    $("#propertyform").attr("action", url);
+    }
+
+
+    //finish button click
+    $("#finish").click(function (e) {
+
+    if (!$("#propertyform").valid()) {
+    return;
+    }
+
+    updateActionUrl();
+
+
+    });
+
+ $(document).ready(function () {
+     $('#City').change();
+  });
+
+    </script>
+}
+@*$('<option>
+    ', {
+    value: district.Value,
+    text: district.Text
+    })*@

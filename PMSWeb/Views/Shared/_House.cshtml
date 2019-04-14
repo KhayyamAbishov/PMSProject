@@ -1,0 +1,182 @@
+﻿@using PMSOperation.Models
+@model HouseModel
+<!--  End step 1 -->
+<h4 class="info-text"> How much your HOUSE Property is Beautiful ? </h4>
+<div class="row">
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-12">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FloorNumberHouse)
+                    @Html.DropDownListFor(m => m.FloorNumberHouse,
+              Enumerable.Range(1, 18).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.FloorNumberHouse), @class = " selectpicker show-tick form-control", @required = "required"})
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.RoomNumberHouse)
+
+                    @Html.DropDownListFor(m => m.RoomNumberHouse,
+              Enumerable.Range(1, 7).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.RoomNumberHouse), @class = " selectpicker show-tick form-control", @required = "required"})
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BathroomHouse)
+                    @Html.DropDownListFor(m => m.BathroomHouse,
+               Enumerable.Range(1, 4).Select(i => new SelectListItem { Text = i.ToString(),
+                   Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.BathroomHouse), @class = " selectpicker show-tick form-control", @required = "required"})
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.GarageHouse)
+                    @Html.DropDownListFor(m => m.GarageHouse,
+              Enumerable.Range(1, 4).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.GarageHouse), @class = " selectpicker show-tick form-control", @required = "required"})
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.TotalAreaHouse)
+                    @Html.TextBoxFor(m => m.TotalAreaHouse, new { @class = "form-control", required = "required", placeholder = "0", id = "TotalArea", name = "TotalArea", type = "number" })
+                    @Html.ValidationMessageFor(m => m.TotalAreaHouse, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LandAreaHouse)
+                    @Html.TextBoxFor(m => m.LandAreaHouse, new { @class = "form-control", required = "required", placeholder = "0", id = "LandArea", name = "LandArea", type = "number" })
+                    @Html.ValidationMessageFor(m => m.LandAreaHouse, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CreditHouse)
+                    @Html.LabelFor(m => m.CreditHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.HasDcoumentHouse)
+                    @Html.LabelFor(m => m.HasDcoumentHouse)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RepairingHouse)
+                    @Html.LabelFor(m => m.RepairingHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.GasHouse)
+                    @Html.LabelFor(m => m.GasHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.WaterHouse)
+                    @Html.LabelFor(m => m.WaterHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ElectricHouse)
+                    @Html.LabelFor(m => m.ElectricHouse)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.TelephoneHouse)
+                    @Html.LabelFor(m => m.TelephoneHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.InternetHouse)
+                    @Html.LabelFor(m => m.InternetHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ConditionerHouse)
+                    @Html.LabelFor(m => m.ConditionerHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CabelTVHouse)
+                    @Html.LabelFor(m => m.CabelTVHouse)
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.HandyHouse)
+                    @Html.LabelFor(m => m.HandyHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.KitchenFurnitureHouse)
+                    @Html.LabelFor(m => m.KitchenFurnitureHouse)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CombySystemHouse)
+                    @Html.LabelFor(m => m.CombySystemHouse)
+                </div>
+            </div>
+        </div>
+    </div>
+        <br>
+    </div>
+    <!-- End step 2 -->

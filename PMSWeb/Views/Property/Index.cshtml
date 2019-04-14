@@ -1,0 +1,296 @@
+﻿@using PMSOperation.Models
+@model  List<PropertyViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.Partial("EndHeadPage")
+<!-- property area -->
+<div class="properties-area recent-property" style="background-color: #FFF;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 padding-top-40 properties-page">
+                <div class="section clear">
+                    <div class="col-xs-10 page-subheader sorting pl0">
+                        <ul class="sort-by-list">
+                            <li class="active">
+                                @*<a href="@Url.Action("OrderDate", "Property",null)" class="order_by_date" data-orderby="property_date" data-order="ASC">
+                                Property Date <i class="fa fa-sort-amount-asc"></i>
+                            </a>*@
+                            </li>
+                            <li class="">
+                                @*<a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
+                                Property Price <i class="fa fa-sort-numeric-desc"></i>
+                            </a>*@
+                            </li>
+                        </ul><!--/ .sort-by-list-->
+                        <div class="items-per-page">
+                            @*<label for="items_per_page"><b>Property per page :</b></label>
+                        <div class="sel">
+                            <select id="items_per_page" name="per_page">
+                                <option value="3">3</option>
+                                <option value="6">6</option>
+                                <option value="9">9</option>
+                                <option selected="selected" value="12">12</option>
+                                <option value="15">15</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                                <option value="60">60</option>
+                            </select>
+                        </div>*@<!--/ .sel-->
+                        </div><!--/ .items-per-page-->
+                    </div>
+                    <div class="col-xs-2 layout-switcher">
+                        <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
+                        <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
+                    </div><!--/ .layout-switcher-->
+                </div>
+                <div class="section clear">
+                    <div id="list-type" class="proerty-th">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-sm-6 col-md-4 p0">
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="@Url.Action("Detail", "Property", new { id = item.PropertyId })">
+
+                                            <img alt="Widget View" src="@Url.Content(item.Photo.Split(',')[0]) " height="200" width="200">
+                                        </a>
+                                        @*<a href="property-1.html"><img src="~/Content/assets/img/demo/property-3.jpg"></a>*@
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <h5>
+                                            <a href="@Url.Action("Detail", "Property", new { id = item.PropertyId })">@item.PropertyType</a>
+                                            <span class="proerty-price pull-right">@item.Price  <span>&#8380;</span></span>
+                                        </h5>
+
+
+                                        <div class="dot-hr"></div>
+                                        @if (item.PropertyType == PMSOperation.PropertyTypeClassifier.Apartament ||
+                                                    item.PropertyType == PMSOperation.PropertyTypeClassifier.House ||
+                                                    item.PropertyType == PMSOperation.PropertyTypeClassifier.Commercial)
+                                        {
+                                            <span class="pull-left"><b> Area :</b> @item.TotalArea  m<sup>2</sup></span>
+                                        }
+
+                                        @if (item.PropertyType == PMSOperation.PropertyTypeClassifier.House
+                                            || item.PropertyType == PMSOperation.PropertyTypeClassifier.Land)
+                                        {
+                                            <span class="pull-right"><b> Land Area :</b> @item.LandArea sot</span>
+                                        }
+
+                                        <p style="display: none;"></p>
+                                        <div class="property-icon">
+
+
+                                            @if (item.PropertyType == PMSOperation.PropertyTypeClassifier.House)
+                                            {
+                                                <img src="~/Content/assets/img/icon/bed.png"> @(item.RoomNumber) <span>|</span>;
+                                                <img src="~/Content/assets/img/icon/shawer.png"> @(item.Bathroom) <span>|</span>;
+                                                <img src="~/Content/assets/img/icon/cars.png"> @(item.Garage) <span>|</span>;
+                                            }
+                                            @if (item.PropertyType == PMSOperation.PropertyTypeClassifier.Apartament)
+                                            {
+                                                <img src="~/Content/assets/img/icon/bed.png"> @(item.RoomNumber) <span>|</span>;
+                                                <img src="~/Content/assets/img/icon/shawer.png"> @(item.Bathroom) <span>|</span>;
+
+                                            }
+
+                                            @if (item.PropertyStatus == PMSOperation.PropertyStatusClassifier.Rent)
+                                            {
+                                                <img src="~/Content/assets/img/icon/rent-orange.png">
+
+                                            }
+                                            else
+                                            {
+
+                                                <img src="~/Content/assets/img/icon/sale-orange.png">
+
+                                            }
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        }
+
+                        @*is bittikden sonra sil*@
+
+                        @*<div class="col-sm-6 col-md-4 p0">
+                    <div class="box-two proerty-item">
+                        <div class="item-thumb">
+
+                            <a href="property-1.html"><img src="~/Content/assets/img/demo/property-3.jpg"></a>
+                        </div>
+                        <div class="item-entry overflow">
+
+                            <h5>
+
+                                <a href="property-1.html">Apartamnet</a>
+                                <span class="proerty-price pull-right"> <span>&#8380;</span>300,000</span>
+                            </h5>
+
+
+                            <div class="dot-hr"></div>
+                            <span class="pull-left"><b> Area :</b> 120m2 </span>*@
+                        @*<span class="pull-right"><b> Land Area :</b> 120sot </span>*@
+
+                        @*<p style="display: none;">Suspendisse ultricies Suspendisse ultricies Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium ...</p>
+                                <div class="property-icon">
+
+                                    <img src="~/Content/assets/img/icon/bed.png">(5) |
+                                    <img src="~/Content/assets/img/icon/shawer.png">(2) |
+                                    <img src="~/Content/assets/img/icon/cars.png">(1)  |
+                                    <img src="~/Content/assets/img/icon/rent-orange.png">
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>*@
+
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="pull-right">
+                        <div class="pagination">
+                            <ul>
+                                <li><a href="#">Prev</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 pl0 padding-top-40">
+                <div class="blog-asside-right pl0">
+
+                    <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><a href="@Url.Action("SearchProperty", "Search")">Smart search</a> </h3>
+                        </div>
+                        <div class="panel-body search-widget">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        //city dropdown select
+        $('#CityId').change(function () {
+            var model = @Html.Raw(Json.Encode(Model));
+
+                var selectedCity = $("#CityId").val();
+                var districtSelect = $('#DistrictId');
+                var metrosSelect = $('#MetroId');
+                districtSelect.empty();
+                metrosSelect.empty();
+
+                if (selectedCity != null && selectedCity != '') {
+                    $.getJSON('@Url.Action("GetDistrict", "Property")', { city: selectedCity }, function (districts) {
+                        if (districts != null && !jQuery.isEmptyObject(districts))
+                        {
+                            districtSelect.append($('<option>', {
+                                value: "",
+                                text: "-District-"
+                            }));
+                            $.each(districts, function (index, district) {
+                                districtSelect.append('<option value=' + district.Id + '>' + district.Name + '</option>');
+
+                            });
+
+                            if (model.District != null)
+                                $("#DistrictId").val(model.District);
+                        };
+                    });
+                }
+
+                if (selectedCity == 1) {
+                    $('#metroSec').show();
+
+                     $.getJSON('@Url.Action("GetMetro", "Property")', { city: selectedCity }, function (metroes) {
+                         if (metroes != null && !jQuery.isEmptyObject(metroes))
+                        {
+                             metrosSelect.append($('<option>', {
+                                value: "",
+                                text: "-Metro-"
+                            }));
+                             $.each(metroes, function (index, metro) {
+                                 metrosSelect.append('<option value=' + metro.Id + '>' + metro.Name + '</option>');
+                             });
+
+                             if (model.Metro != null)
+                                 $("#MetroId").val(model.Metro);
+                        };
+                    });
+                }
+                else {
+                    $('#metroSec').hide();
+                }
+        });
+
+
+
+
+        $('#PropertyType').change(function () {
+
+            var type = $('#PropertyType').val();
+
+            if (type == "1") {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').hide();
+            }
+            else if (type == "2") {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').show();
+            }
+            else if (type == "3") {
+                $('#houseapartcommarea').hide();
+                $('#houselandarea').show();
+            }
+            else if (type == "4") {
+                $('#houseapartcommarea').show();
+                $('#houselandarea').show();
+            }
+            else {
+                $('#houseapartcommarea').hide();
+                $('#houselandarea').hide();
+            }
+
+
+            if (type == "1") {
+                $('#apartment').show();
+                $('#house').hide();
+            }
+            else if (type == "2") {
+                $('#apartment').hide();
+                $('#house').show();
+            }
+            else {
+                $('#apartment').hide();
+                $('#house').hide();
+            }
+        });
+
+
+    </script>
+}

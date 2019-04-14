@@ -1,0 +1,166 @@
+﻿@using PMSOperation.Models
+@model CommercialModel
+
+<!--  End step 1 -->
+
+<h4 class="info-text"> How much your Commercials Property is Beautiful ? </h4>
+<div class="row">
+
+    <div class="col-sm-12">
+        <div class="col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.FlatFloorCommercial)
+                @Html.DropDownListFor(m => m.FlatFloorCommercial,
+              Enumerable.Range(1, 7).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.FlatFloorCommercial), @class = " selectpicker show-tick form-control", @required = "required"})
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.FloorNumberCommercial)
+                @Html.DropDownListFor(m => m.FloorNumberCommercial,
+              Enumerable.Range(1, 18).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.FloorNumberCommercial), @class = " selectpicker show-tick form-control", @required = "required"})
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoomNumberCommercial)
+                @Html.DropDownListFor(m => m.RoomNumberCommercial,
+              Enumerable.Range(1, 18).Select(i => new SelectListItem { Text = i.ToString(),
+                  Value = i.ToString() }), new { placeholder = Html.DisplayNameFor(x => x.RoomNumberCommercial), @class = " selectpicker show-tick form-control", @required = "required"})
+
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                @Html.LabelFor(m => m.TotalAreaCommercial)
+                @Html.TextBoxFor(m => m.TotalAreaCommercial, new { @class = "form-control", required = "required", placeholder = "0", id = "TotalArea", name = "TotalArea", type = "number" })
+                @Html.ValidationMessageFor(m => m.TotalAreaCommercial, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CreditCommercial)
+                    @Html.LabelFor(m => m.CreditCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.HasDocumentCommercial)
+                    @Html.LabelFor(m => m.HasDocumentCommercial)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RepairingCommercial)
+                    @Html.LabelFor(m => m.RepairingCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.GasCommercial)
+                    @Html.LabelFor(m => m.GasCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.WaterCommercial)
+                    @Html.LabelFor(m => m.WaterCommercial)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ElectricCommercial)
+                    @Html.LabelFor(m => m.ElectricCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.TelephoneCommercial)
+                    @Html.LabelFor(m => m.TelephoneCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CabelTVCommercial)
+                    @Html.LabelFor(m => m.CabelTVCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CentralHeatingSystemCommercial)
+                    @Html.LabelFor(m => m.CentralHeatingSystemCommercial)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 padding-top-15">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.InternetCommercial)
+                    @Html.LabelFor(m => m.InternetCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ConditionerCommercial)
+                    @Html.LabelFor(m => m.ConditionerCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.HandyCommercial)
+                    @Html.LabelFor(m => m.HandyCommercial)
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.CombySystemCommercial)
+                    @Html.LabelFor(m => m.CombySystemCommercial)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+</div>
+<!-- End step 2 -->
+@*@RenderSection("scripts", required: false)*@

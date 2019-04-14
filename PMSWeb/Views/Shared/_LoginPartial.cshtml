@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+                <a href='@Url.Action("UserProfile", "Account")'>
+
+                    <img src=~/Content/assets/img/icon/profile-icon.png />
+                    @User.Identity.GetUserName()
+                </a>
+
+                @*@Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+            </li>
+            @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>*@
+            <li>
+                <button class="navbar-btn nav-button wow bounceInRight login" id="loginLink" onclick="window.location.href='@Url.Action("LogOff", "Account",null)'" data-wow-delay="0.45s">
+                    Log Off
+                </button>
+            </li>
+        </ul>
+        }
+    </li>
+    <li>
+        <button class="navbar-btn nav-button wow fadeInRight login " onclick="window.location.href='@Url.Action("Submit", "Property")'" data-wow-delay="0.48s">
+            Add Property
+        </button>
+    </li>
+   
+    </ul>
+    }
+    else
+    {
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <button class="navbar-btn nav-button wow bounceInRight login" id="loginLink" onclick="window.location.href='@Url.Action("Login", "Account",null)'" data-wow-delay="0.45s">
+                Login
+            </button>
+        </li>
+        <li>
+            <button class="navbar-btn nav-button wow bounceInRight login" id="registerLink" onclick="window.location.href='@Url.Action("Register", "Account",null)'" data-wow-delay="0.45s">
+                Register
+            </button>
+        </li>
+        
+    </ul>
+    }

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMSOperation", "PMSOperation\PMSOperation.csproj", "{B148205F-FE56-493B-A4F7-7864A70FD5AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMSData", "PMSData\PMSData.csproj", "{7FEBD073-F945-414C-A873-D3A8C2CDCA05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMSWeb", "PMSWeb\PMSWeb.csproj", "{2043E94E-D71A-4DB2-9403-BC0DA41B3A2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B148205F-FE56-493B-A4F7-7864A70FD5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B148205F-FE56-493B-A4F7-7864A70FD5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B148205F-FE56-493B-A4F7-7864A70FD5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B148205F-FE56-493B-A4F7-7864A70FD5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FEBD073-F945-414C-A873-D3A8C2CDCA05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FEBD073-F945-414C-A873-D3A8C2CDCA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FEBD073-F945-414C-A873-D3A8C2CDCA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FEBD073-F945-414C-A873-D3A8C2CDCA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2043E94E-D71A-4DB2-9403-BC0DA41B3A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2043E94E-D71A-4DB2-9403-BC0DA41B3A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2043E94E-D71A-4DB2-9403-BC0DA41B3A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2043E94E-D71A-4DB2-9403-BC0DA41B3A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10A76F73-8A65-4C67-AF00-8798E4C32D14}
+	EndGlobalSection
+EndGlobal
